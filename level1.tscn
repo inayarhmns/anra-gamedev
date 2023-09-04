@@ -1,0 +1,271 @@
+[gd_scene load_steps=27 format=3 uid="uid://cgj72udnop0hi"]
+
+[ext_resource type="PackedScene" uid="uid://etd7n7g77eik" path="res://bg/parallax_background.tscn" id="1_krg0l"]
+[ext_resource type="Script" path="res://level1.gd" id="1_v0p1j"]
+[ext_resource type="PackedScene" uid="uid://bneu2npvyakis" path="res://player/player.tscn" id="2_ltkjv"]
+[ext_resource type="Texture2D" uid="uid://c6cwac8rjd62f" path="res://bg/foreground.png" id="3_qutis"]
+[ext_resource type="Script" path="res://tileset.gd" id="5_iexeq"]
+[ext_resource type="PackedScene" uid="uid://cw332ljbbcxun" path="res://tileset/elevating_crate.tscn" id="5_rtmil"]
+[ext_resource type="PackedScene" uid="uid://crv8k3rp3ug58" path="res://tileset/enemy_ground_body.tscn" id="7_oplk6"]
+[ext_resource type="PackedScene" uid="uid://dq5kv6hqxv871" path="res://tileset/elevating_ground.tscn" id="8_v8mol"]
+[ext_resource type="PackedScene" uid="uid://mdvk5s5yaims" path="res://tileset/non_gravity_area.tscn" id="9_cwxan"]
+[ext_resource type="Texture2D" uid="uid://c7h1ber61bhxm" path="res://tileset/fragile sprite.png" id="10_a5fxo"]
+[ext_resource type="Script" path="res://FragileGround.gd" id="10_wo440"]
+[ext_resource type="PackedScene" uid="uid://ib4qehqddd2o" path="res://fragile_area.tscn" id="11_p5kyh"]
+[ext_resource type="Texture2D" uid="uid://cwqhgwei06nrw" path="res://elements/emilium.png" id="13_bwn1b"]
+[ext_resource type="Script" path="res://emilium.gd" id="13_wo3v6"]
+[ext_resource type="Script" path="res://RockBottom.gd" id="13_wtlc0"]
+[ext_resource type="Texture2D" uid="uid://cctq1an7mjk6i" path="res://bg/rockbottom-sprite.png" id="14_et4lm"]
+
+[sub_resource type="GDScript" id="GDScript_jtfyp"]
+script/source = "extends Area2D
+
+
+#func _physics_process(delta):
+#	if get_overlapping_bodies().length != 0:
+#		for body in get_overlapping_bodies():
+#			if body.get_name() == \"player\":
+#
+				
+			
+
+#func _on_body_entered(body):
+#	body.velocity = Vector2.ZERO
+#	print(\"Anra is dead\")
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjfh0"]
+radius = 17.0294
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a7wu"]
+atlas = ExtResource("13_bwn1b")
+region = Rect2(0, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6olcg"]
+atlas = ExtResource("13_bwn1b")
+region = Rect2(257, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5heqo"]
+atlas = ExtResource("13_bwn1b")
+region = Rect2(514, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lp1x"]
+atlas = ExtResource("13_bwn1b")
+region = Rect2(771, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h25ic"]
+atlas = ExtResource("13_bwn1b")
+region = Rect2(1028, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tna71"]
+atlas = ExtResource("13_bwn1b")
+region = Rect2(1285, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xm2s"]
+atlas = ExtResource("13_bwn1b")
+region = Rect2(1542, 0, 257, 257)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fkoc3"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_7a7wu")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_6olcg")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_5heqo")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_2lp1x")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_h25ic")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_tna71")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_0xm2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Anra" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_v0p1j")
+metadata/_edit_vertical_guides_ = [320.0, 960.0, -304.0, 1616.0, 1968.0]
+metadata/_edit_horizontal_guides_ = [-112.0, -16.0]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_krg0l")]
+scale = Vector2(0.1, 0.1)
+transform = Transform2D(0.1, 0, 0, 0.1, 0, 0)
+
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
+layer = 0
+scale = Vector2(0.1, 0.1)
+transform = Transform2D(0.1, 0, 0, 0.1, 0, 0)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxForeground"]
+visible = false
+
+[node name="Foreground" type="Sprite2D" parent="ParallaxForeground/ParallaxLayer"]
+position = Vector2(2000, 442)
+scale = Vector2(0.22051, 0.22051)
+texture = ExtResource("3_qutis")
+
+[node name="player" parent="." instance=ExtResource("2_ltkjv")]
+position = Vector2(1808, 320)
+scale = Vector2(0.3, 0.3)
+
+[node name="tileset" type="StaticBody2D" parent="."]
+position = Vector2(64, 1801)
+script = ExtResource("5_iexeq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tileset"]
+position = Vector2(48, -1625)
+scale = Vector2(0.288001, 0.288001)
+polygon = PackedVector2Array(-444.443, 444.443, -224, 672, 928, 672, 928, 1120, 999.997, 1277.77, 1111.11, 1111.11, 1111.11, 666.664, 2111.1, 666.664, 2111.1, 1222.22, 2222.21, 1333.33, 2333.33, 1222.22, 2166.66, -111.111, 3277.77, -111.111, 3277.77, 944.441, 3277.77, 1944.44, -444.443, 1944.44)
+
+[node name="Polygon2D" type="Polygon2D" parent="tileset/CollisionPolygon2D"]
+color = Color(0.184314, 0.196078, 0.235294, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="tileset"]
+position = Vector2(-1, 0)
+color = Color(0.184314, 0.196078, 0.235294, 1)
+polygon = PackedVector2Array(977, -1225, 1041, -1225, 1489, -1225, 1489, -1065, 977, -1065)
+
+[node name="EnemyGroundBody" parent="tileset" instance=ExtResource("7_oplk6")]
+position = Vector2(-613, -1780)
+scale = Vector2(1.5, 0.75)
+
+[node name="ElevatingGround" parent="tileset" instance=ExtResource("8_v8mol")]
+position = Vector2(346, -1949)
+scale = Vector2(0.61, 1)
+
+[node name="NonGravityArea" parent="tileset" instance=ExtResource("9_cwxan")]
+position = Vector2(-55, -1833)
+scale = Vector2(1, 1.2)
+
+[node name="SkyLimit" type="Area2D" parent="tileset"]
+position = Vector2(-64, -1801)
+script = SubResource("GDScript_jtfyp")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tileset/SkyLimit"]
+position = Vector2(16, 0)
+scale = Vector2(1.52989, 3.52083)
+polygon = PackedVector2Array(16, 0, 1840, 0, 1840, -96, 1676.47, -96, 0, -96, 0, 0)
+
+[node name="elevating_crate" parent="tileset" instance=ExtResource("5_rtmil")]
+position = Vector2(448, -1593)
+scale = Vector2(0.7, 0.7)
+
+[node name="JumpCollisionPolygon2D2" type="CollisionPolygon2D" parent="tileset"]
+position = Vector2(-7, -14)
+polygon = PackedVector2Array(1344, -1593, 1344, -1545, 1504, -1545, 1504, -1593)
+
+[node name="JumpPolygon" type="Polygon2D" parent="tileset/JumpCollisionPolygon2D2"]
+color = Color(0.184314, 0.196078, 0.235294, 1)
+
+[node name="JumpCollisionPolygon2" type="CollisionPolygon2D" parent="tileset"]
+position = Vector2(176, 631)
+scale = Vector2(1, 1.4127)
+polygon = PackedVector2Array(1536, -1755.5, 1536, -1593, 2160, -1593, 2160, -1755.5)
+
+[node name="JumpPolygon2" type="Polygon2D" parent="tileset/JumpCollisionPolygon2"]
+color = Color(0.184314, 0.196078, 0.235294, 1)
+
+[node name="elevateground2" type="Polygon2D" parent="tileset"]
+position = Vector2(0, -57)
+color = Color(0.184314, 0.196078, 0.235294, 1)
+polygon = PackedVector2Array(1520, -1145, 1520, -1065, 1904, -1065, 1904, -1161, 1520, -1161)
+
+[node name="ElevatingGround2" parent="tileset" instance=ExtResource("8_v8mol")]
+position = Vector2(1072, -1881)
+scale = Vector2(0.432, 0.9)
+
+[node name="FragileGround" type="CollisionPolygon2D" parent="tileset"]
+position = Vector2(-597.818, -484.585)
+scale = Vector2(1.40074, 0.644585)
+polygon = PackedVector2Array(1520, -1497, 1792, -1497, 1792, -1417, 1520, -1417)
+script = ExtResource("10_wo440")
+
+[node name="FragilePolygon" type="Polygon2D" parent="tileset/FragileGround"]
+color = Color(0.184314, 0.196078, 0.235294, 1)
+
+[node name="FragileArea" parent="tileset/FragileGround" instance=ExtResource("11_p5kyh")]
+position = Vector2(401.088, -2645.75)
+scale = Vector2(0.713911, 3.10277)
+script = null
+
+[node name="FragileSprite" type="Sprite2D" parent="tileset/FragileGround"]
+position = Vector2(1580.6, -1475)
+scale = Vector2(0.356955, 0.5)
+texture = ExtResource("10_a5fxo")
+
+[node name="FragileSprite3" type="Sprite2D" parent="tileset/FragileGround"]
+position = Vector2(1734.8, -1475)
+scale = Vector2(0.356955, 0.5)
+texture = ExtResource("10_a5fxo")
+
+[node name="FragileSprite2" type="Sprite2D" parent="tileset/FragileGround"]
+position = Vector2(1655.56, -1462)
+scale = Vector2(0.356955, 0.783333)
+texture = ExtResource("10_a5fxo")
+
+[node name="FragileSurface" type="Area2D" parent="tileset/FragileGround"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tileset/FragileGround/FragileSurface"]
+position = Vector2(9.151, -9.95142)
+scale = Vector2(0.994792, 0.999999)
+polygon = PackedVector2Array(1519.2, -1492.29, 1793.34, -1492.29, 1793.34, -1467.47, 1519.2, -1467.47)
+
+[node name="NonGravityArea2" parent="tileset" instance=ExtResource("9_cwxan")]
+position = Vector2(1244, -1801)
+scale = Vector2(0.425, 0.944)
+
+[node name="RockBottom" type="Area2D" parent="tileset"]
+script = ExtResource("13_wtlc0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tileset/RockBottom"]
+polygon = PackedVector2Array(-80, -1065, 2800, -1065, 2800, -649, -80, -649)
+
+[node name="Rockbottom-sprite" type="Sprite2D" parent="tileset/RockBottom"]
+position = Vector2(1360, -945)
+scale = Vector2(0.743795, 0.56338)
+texture = ExtResource("14_et4lm")
+
+[node name="EnemyCollPolygon" type="CollisionPolygon2D" parent="tileset"]
+position = Vector2(14, 3)
+polygon = PackedVector2Array(1035, -1692, 1035, -1596, 1483, -1596, 1483, -1692)
+
+[node name="EnemyPolygon" type="Polygon2D" parent="tileset/EnemyCollPolygon"]
+color = Color(0.184314, 0.196078, 0.235294, 1)
+
+[node name="elements" type="Node2D" parent="."]
+
+[node name="emilium" type="Area2D" parent="elements"]
+script = ExtResource("13_wo3v6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="elements/emilium"]
+position = Vector2(1807, 191)
+shape = SubResource("CircleShape2D_xjfh0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="elements/emilium"]
+position = Vector2(1808, 192)
+scale = Vector2(0.42072, 0.420722)
+sprite_frames = SubResource("SpriteFrames_fkoc3")
+autoplay = "default"
+frame_progress = 0.518239
+
+[connection signal="body_entered" from="tileset/SkyLimit" to="tileset/SkyLimit" method="_on_body_entered"]
+[connection signal="body_entered" from="tileset/FragileGround/FragileArea" to="tileset/FragileGround" method="_on_fragile_area_body_entered"]
+[connection signal="body_exited" from="tileset/FragileGround/FragileArea" to="tileset/FragileGround" method="_on_fragile_area_body_exited"]
+[connection signal="body_entered" from="tileset/FragileGround/FragileSurface" to="tileset/FragileGround" method="_on_fragile_surface_body_entered"]
+[connection signal="area_entered" from="tileset/RockBottom" to="tileset/RockBottom" method="_on_area_entered"]
+[connection signal="body_entered" from="tileset/RockBottom" to="tileset/RockBottom" method="_on_body_entered"]
+[connection signal="body_entered" from="elements/emilium" to="elements/emilium" method="_on_body_entered"]

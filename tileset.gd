@@ -9,6 +9,8 @@ extends StaticBody2D
 @onready var fragile_polygon = $FragileGround/FragilePolygon
 @onready var jump_collision_polygon_2 = $JumpCollisionPolygon2
 @onready var jump_polygon_2 = $JumpCollisionPolygon2/JumpPolygon2
+@onready var enemy_coll_polygon = $EnemyCollPolygon
+@onready var enemy_polygon = $EnemyCollPolygon/EnemyPolygon
 
 
 
@@ -17,6 +19,7 @@ func _ready():
 	jump_polygon.polygon = jump_collision_polygon_2d_2.polygon
 	fragile_polygon.polygon = fragile_ground.polygon
 	jump_polygon_2.polygon = jump_collision_polygon_2.polygon
+	enemy_polygon.polygon = enemy_coll_polygon.polygon
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

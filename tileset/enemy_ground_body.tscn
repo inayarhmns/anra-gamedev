@@ -1,24 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://crv8k3rp3ug58"]
 
-[ext_resource type="Script" path="res://tileset/EnemyGroundBody.gd" id="1_qf6ot"]
+[ext_resource type="Script" path="res://tileset/enemy_ground_body.gd" id="1_svt1q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5er0"]
 size = Vector2(298.5, 14)
 
-[node name="EnemyGroundBody" type="StaticBody2D"]
-script = ExtResource("1_qf6ot")
+[node name="hitbox" type="Area2D"]
+script = ExtResource("1_svt1q")
 
-[node name="CollisionEnemyGround" type="CollisionPolygon2D" parent="."]
-position = Vector2(64, 1776)
-polygon = PackedVector2Array(1040, -1657, 1059.01, -1657, 1344, -1657, 1344, -1536, 1040, -1536)
-
-[node name="EnemyGroundPolygon" type="Polygon2D" parent="CollisionEnemyGround"]
-color = Color(0.184314, 0.196078, 0.235294, 1)
-
-[node name="hitbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1257, 121)
 shape = SubResource("RectangleShape2D_k5er0")
 
-[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

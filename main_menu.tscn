@@ -1,0 +1,153 @@
+[gd_scene load_steps=19 format=3 uid="uid://evxvwvgw22r7"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_1abmn"]
+[ext_resource type="Texture2D" uid="uid://dsxy1b2xvrbod" path="res://bg/skybase-bg.png" id="2_ge1wq"]
+[ext_resource type="Texture2D" uid="uid://b2w4k6fd0nnea" path="res://bg/abs-clouds-bg.png" id="3_dn6yw"]
+[ext_resource type="Texture2D" uid="uid://baroxnbcjde5j" path="res://bg/clouds-bg.png" id="4_kgy8r"]
+[ext_resource type="Texture2D" uid="uid://dui3ux81c1la" path="res://bg/rocket-anim.png" id="5_q4evj"]
+[ext_resource type="Texture2D" uid="uid://uqaud81axkrt" path="res://ui/button-play.png" id="6_07mom"]
+[ext_resource type="Texture2D" uid="uid://ue5v8o4g5h1f" path="res://ui/clickedbutton-play.png" id="7_xl601"]
+[ext_resource type="Texture2D" uid="uid://dxx43blq4i5j5" path="res://ui/button-control.png" id="8_w1wkd"]
+[ext_resource type="Texture2D" uid="uid://neh11ms31iu4" path="res://ui/clickedbutton-control.png" id="9_35d4v"]
+[ext_resource type="Texture2D" uid="uid://cihx8co2rp55" path="res://ui/button-quit.png" id="10_fmscm"]
+[ext_resource type="Texture2D" uid="uid://c1djv23bgccy1" path="res://ui/clickedbutton-quit.png" id="11_jm0an"]
+[ext_resource type="Texture2D" uid="uid://crpufe2a1vh6" path="res://ui/font-ANRA.png" id="12_r7f3i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmqup"]
+atlas = ExtResource("5_q4evj")
+region = Rect2(0, 0, 2040, 2040)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ovie"]
+atlas = ExtResource("5_q4evj")
+region = Rect2(2040, 0, 2040, 2040)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cvy2"]
+atlas = ExtResource("5_q4evj")
+region = Rect2(4080, 0, 2040, 2040)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyhd5"]
+atlas = ExtResource("5_q4evj")
+region = Rect2(6120, 0, 2040, 2040)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt42j"]
+atlas = ExtResource("5_q4evj")
+region = Rect2(8160, 0, 2040, 2040)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ba5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmqup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ovie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cvy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyhd5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt42j")
+}],
+"loop": true,
+"name": &"rocket",
+"speed": 30.0
+}]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_1abmn")
+metadata/_edit_vertical_guides_ = [-2512.0]
+metadata/_edit_horizontal_guides_ = []
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+scale = Vector2(0.25, 0.25)
+transform = Transform2D(0.25, 0, 0, 0.25, 0, 0)
+
+[node name="Skybase-bg" type="Sprite2D" parent="ParallaxBackground2"]
+position = Vector2(7452, 1408)
+scale = Vector2(1, 0.95978)
+texture = ExtResource("2_ge1wq")
+
+[node name="abscloud" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.2, 0.2)
+motion_offset = Vector2(40, 40)
+motion_mirroring = Vector2(14903, 0)
+
+[node name="Abs-clouds-bg" type="Sprite2D" parent="ParallaxBackground2/abscloud"]
+position = Vector2(7452, 1300)
+texture = ExtResource("3_dn6yw")
+
+[node name="clouds" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_mirroring = Vector2(14903, 0)
+
+[node name="Clouds-bg" type="Sprite2D" parent="ParallaxBackground2/clouds"]
+position = Vector2(5952, 1024)
+texture = ExtResource("4_kgy8r")
+
+[node name="clouds3" type="ParallaxLayer" parent="ParallaxBackground2"]
+position = Vector2(0, -180)
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(14903, 0)
+
+[node name="Clouds-bg" type="Sprite2D" parent="ParallaxBackground2/clouds3"]
+position = Vector2(7296, 1524)
+texture = ExtResource("4_kgy8r")
+
+[node name="ROCKET" type="AnimatedSprite2D" parent="ParallaxBackground2"]
+position = Vector2(2176, 1024)
+rotation = -0.555015
+scale = Vector2(1.10931, 1.10931)
+sprite_frames = SubResource("SpriteFrames_1ba5d")
+animation = &"rocket"
+autoplay = "rocket"
+frame_progress = 0.863886
+
+[node name="clouds2" type="ParallaxLayer" parent="ParallaxBackground2"]
+position = Vector2(0, 300)
+motion_scale = Vector2(10, 10)
+motion_mirroring = Vector2(14903, 0)
+
+[node name="Clouds-bg" type="Sprite2D" parent="ParallaxBackground2/clouds2"]
+position = Vector2(4736, 1364)
+texture = ExtResource("4_kgy8r")
+
+[node name="play" type="TextureButton" parent="."]
+offset_left = 480.0
+offset_top = 320.0
+offset_right = 705.0
+offset_bottom = 400.0
+texture_normal = ExtResource("6_07mom")
+texture_pressed = ExtResource("7_xl601")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="control" type="TextureButton" parent="."]
+offset_left = 480.0
+offset_top = 416.0
+offset_right = 705.0
+offset_bottom = 496.0
+texture_normal = ExtResource("8_w1wkd")
+texture_pressed = ExtResource("9_35d4v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="quit" type="TextureButton" parent="."]
+offset_left = 480.0
+offset_top = 512.0
+offset_right = 705.0
+offset_bottom = 592.0
+texture_normal = ExtResource("10_fmscm")
+texture_pressed = ExtResource("11_jm0an")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Font-anra" type="Sprite2D" parent="."]
+position = Vector2(576, 160)
+scale = Vector2(0.19933, 0.19933)
+texture = ExtResource("12_r7f3i")
+
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="control" to="." method="_on_control_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

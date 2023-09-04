@@ -204,7 +204,6 @@ func jump():
 			velocity.y = -jump_velo
 			if (on_fragile_ground): 
 				jump_count = jump_count + 1
-				print(jump_count)
 	else:
 		velocity.y -= get_reverse_gravity()
 		if (Input.is_action_pressed("ui_up") && is_on_ceiling()):
