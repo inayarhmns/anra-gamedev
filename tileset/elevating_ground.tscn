@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq5kv6hqxv871"]
+
+[ext_resource type="Texture2D" uid="uid://clx1ufxymgt5v" path="res://tileset/elevating-ground-sprite.png" id="1_oaquk"]
+[ext_resource type="Script" path="res://tileset/elevating_ground.gd" id="1_xh3f1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjsvo"]
+size = Vector2(813, 112)
+
+[node name="ElevatingGround" type="StaticBody2D"]
+script = ExtResource("1_xh3f1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.00012207, 401.143)
+scale = Vector2(1, 0.4609)
+polygon = PackedVector2Array(1056, 464, 1872, 466.286, 1872, 746.057, 1056, 746.057)
+
+[node name="Elevating-ground-sprite" type="Sprite2D" parent="."]
+position = Vector2(1260, 636)
+scale = Vector2(0.155148, 0.155014)
+texture = ExtResource("1_oaquk")
+
+[node name="Elevating-ground-sprite2" type="Sprite2D" parent="."]
+position = Vector2(1666.33, 636.29)
+scale = Vector2(0.155148, 0.155014)
+texture = ExtResource("1_oaquk")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0, 352)
+scale = Vector2(1, 0.514706)
+color = Color(0.184314, 0.196078, 0.235294, 1)
+polygon = PackedVector2Array(1056, 590.629, 1056, 746.057, 1872, 746.057, 1872, 652.8, 1872, 590.628, 1872, 559.543, 1056, 559.543)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1465.5, 648)
+shape = SubResource("RectangleShape2D_fjsvo")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

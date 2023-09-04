@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0y4bhev2q0m4"]
+
+[ext_resource type="Script" path="res://log.gd" id="1_8o7si"]
+
+[node name="fragile_log" type="StaticBody2D"]
+script = ExtResource("1_8o7si")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(3, 3)
+polygon = PackedVector2Array(48, 16, 128, 16, 144, 32, 160, 16, 240, 16, 224, 32, 240, 48, 48, 48, 48, 32)
+
+[node name="Polygon2D" type="Polygon2D" parent="CollisionPolygon2D"]
+color = Color(0.184314, 0.196078, 0.235294, 1)

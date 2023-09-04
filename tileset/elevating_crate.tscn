@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://cw332ljbbcxun"]
+
+[ext_resource type="Script" path="res://tileset/elevating_crate.gd" id="1_y3mu5"]
+[ext_resource type="Texture2D" uid="uid://ddk51fe1dfu0t" path="res://tileset/elevating rock.png" id="3_1fbf5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_scme8"]
+radius = 138.328
+height = 276.657
+
+[sub_resource type="GDScript" id="GDScript_fmjck"]
+script/source = "extends Area2D
+
+
+
+#func body_entered():
+#	if body_entered():
+#		print(\"enter\")
+#
+#func body_exited():
+#	if body_exited():
+#		print(\"exited\")
+
+
+#func _on_area_elevating_body_entered(body):
+#	print(body.get_name())
+#	const dir = Vector2(0,-1)
+#	const SPEED = 100.0
+#	const ACC = 50
+##	body.velocity = body.velocity.move_toward(dir*SPEED, ACC)
+#	body.velocity.y = -3000
+	
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vbqw"]
+size = Vector2(117.5, 188.5)
+
+[node name="elevating_crate" type="Node2D"]
+
+[node name="elevating_crate" type="CharacterBody2D" parent="."]
+script = ExtResource("1_y3mu5")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="elevating_crate"]
+position = Vector2(203, 227)
+rotation = 1.53589
+scale = Vector2(0.2, 0.347)
+shape = SubResource("CapsuleShape2D_scme8")
+
+[node name="area_elevating" type="Area2D" parent="elevating_crate"]
+script = SubResource("GDScript_fmjck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="elevating_crate/area_elevating"]
+position = Vector2(204, 159)
+shape = SubResource("RectangleShape2D_3vbqw")
+
+[node name="ElevatingRock" type="Sprite2D" parent="."]
+position = Vector2(204, 222)
+scale = Vector2(0.146958, 0.193046)
+texture = ExtResource("3_1fbf5")
+
+[connection signal="body_entered" from="elevating_crate/area_elevating" to="elevating_crate" method="_on_area_elevating_body_entered"]

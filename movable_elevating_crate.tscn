@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd1mtkdb2rq1s"]
+
+[ext_resource type="Script" path="res://area_elevating.gd" id="1_v8glr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcopd"]
+size = Vector2(96, 384)
+
+[node name="movable_elevating_crate" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+position = Vector2(114, 160)
+scale = Vector2(0.2, 0.347)
+polygon = PackedVector2Array(249.831, 112, 688, 112, 816, 288, 96, 288)
+
+[node name="Polygon2D" type="Polygon2D" parent="CharacterBody2D/CollisionPolygon2D"]
+color = Color(0.184314, 0.196078, 0.235294, 1)
+
+[node name="area_elevating" type="Area2D" parent="CharacterBody2D"]
+script = ExtResource("1_v8glr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/area_elevating"]
+position = Vector2(208, 0)
+shape = SubResource("RectangleShape2D_fcopd")

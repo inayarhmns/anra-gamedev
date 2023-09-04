@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://bneu2npvyakis"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_3pe27"]
+[ext_resource type="Texture2D" uid="uid://d05isrbbk2ruj" path="res://player/Anra.png" id="1_lpf32"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6iml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lpf32")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vt8u1"]
+radius = 35.0
+height = 104.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpsxp"]
+size = Vector2(66, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2422"]
+size = Vector2(78, 24)
+
+[node name="player" type="Node2D"]
+
+[node name="player" type="CharacterBody2D" parent="."]
+floor_stop_on_slope = false
+script = ExtResource("1_3pe27")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+position = Vector2(-2, -1)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_a6iml")
+
+[node name="PlayerCamera" type="Camera2D" parent="player"]
+offset = Vector2(0, 100)
+zoom = Vector2(2.1, 2.1)
+limit_left = 0
+limit_top = -100
+limit_bottom = 1000
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_bottom_margin = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-2, 2)
+shape = SubResource("CapsuleShape2D_vt8u1")
+
+[node name="hurtbox" type="Area2D" parent="player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/hurtbox"]
+position = Vector2(-3, 41)
+shape = SubResource("RectangleShape2D_mpsxp")
+
+[node name="SkyDetector" type="Area2D" parent="player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/SkyDetector"]
+position = Vector2(-2, -39)
+shape = SubResource("RectangleShape2D_i2422")

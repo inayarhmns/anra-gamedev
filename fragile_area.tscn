@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://ib4qehqddd2o"]
+
+[sub_resource type="GDScript" id="GDScript_obcji"]
+script/source = "extends Area2D
+
+#@onready var fragile_ground = $FragileGround
+#@onready var fragile_polygon = $FragileGround/FragilePolygon
+#
+#func _ready():
+#	fragile_polygon.polygon = fragile_ground.polygon
+#
+func _on_body_entered(body):
+	if (body.get_name() == \"player\"):
+		body.on_fragile_ground = true
+
+
+#func _physics_process(delta):
+#	for body in get_overlapping_bodies():
+#		if (body.get_name() == \"player\" && body.jump_count >= 2):
+#			fragile_ground.queue_free()
+#			body.jump_count = 0
+#			break
+
+#
+#func _on_body_exited(body):
+#	if (body.get_name() == \"player\"):
+#		body.jump_count = 0
+"
+
+[node name="FragileArea" type="Area2D"]
+script = SubResource("GDScript_obcji")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.000976563, -18.3002)
+scale = Vector2(1, 1.02083)
+polygon = PackedVector2Array(1568, 336, 1568, 384, 1952, 384, 1952, 336)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

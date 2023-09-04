@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0sonwx4i5qy7"]
+
+[ext_resource type="Script" path="res://vertical_log.gd" id="1_x6rlt"]
+
+[node name="vertical_log" type="Node2D"]
+
+[node name="vertical_log" type="CharacterBody2D" parent="."]
+script = ExtResource("1_x6rlt")
+
+[node name="vertical_log" type="CollisionPolygon2D" parent="vertical_log"]
+polygon = PackedVector2Array(144, -128, 144, 128, 192, 128, 192, -160, 176, -144, 160, -160, 144, -144)
+
+[node name="Polygon2D" type="Polygon2D" parent="vertical_log/vertical_log"]
