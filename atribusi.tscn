@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://etb4o6fldwod"]
+
+[ext_resource type="Script" path="res://atribusi.gd" id="1_dv6qf"]
+
+[node name="atribusi" type="Node2D"]
+script = ExtResource("1_dv6qf")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 1164.0
+offset_bottom = 666.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton"]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 246.0
+offset_right = 957.0
+offset_bottom = 473.0
+theme_override_font_sizes/normal_font_size = 30
+text = "All assets are either made by me in Figma (characters, obstacles, UI) or free-royalty assets from Craftpix.net and Pixabay.com (backgrounds, sound & music).
+"
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

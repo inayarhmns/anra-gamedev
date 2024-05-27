@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-
-const SPEED = 120.0
+var cheat:bool = false
+var SPEED = 120.0
 const ACC: int = 60
 const rotation_speed = 1
 @export var friction: int = 70
@@ -39,6 +39,7 @@ func _physics_process(delta):
 #	print(get_floor_angle())
 #	var inputDirection: Vector2 = input()
 #	move(inputDirection)
+	flee()
 	move_in_gravity()
 	jump()
 	move_and_slide()
@@ -54,12 +55,18 @@ func _physics_process(delta):
 	check_sky()
 #	check_non_gravity_area()
 	move_no_gravity()
+	
 #	print(jump_count)
 #	print(player_camera.offset.y)
 #	print(velocity)
 #	print(is_on_ceiling())
 	
-
+func flee():
+	if (Input.is_action_pressed("interact")):
+		cheat = !cheat
+	print("flee")
+	if (cheat): SPEED = 500
+	else: SPEED = 120
 
 func cam_offset_up_elevate(left_pos, right_pos, target_offset, current_offset, speed):
 	if (global_position.x >= left_pos && global_position.x <= right_pos):

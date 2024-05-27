@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cgj72udnop0hi"]
+[gd_scene load_steps=28 format=3 uid="uid://cgj72udnop0hi"]
 
 [ext_resource type="PackedScene" uid="uid://etd7n7g77eik" path="res://bg/parallax_background.tscn" id="1_krg0l"]
 [ext_resource type="Script" path="res://level1.gd" id="1_v0p1j"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://emilium.gd" id="13_wo3v6"]
 [ext_resource type="Script" path="res://RockBottom.gd" id="13_wtlc0"]
 [ext_resource type="Texture2D" uid="uid://cctq1an7mjk6i" path="res://bg/rockbottom-sprite.png" id="14_et4lm"]
+[ext_resource type="PackedScene" uid="uid://ctga3h8hprdwp" path="res://enemy.tscn" id="17_k7i7u"]
 
 [sub_resource type="GDScript" id="GDScript_jtfyp"]
 script/source = "extends Area2D
@@ -119,7 +120,7 @@ scale = Vector2(0.22051, 0.22051)
 texture = ExtResource("3_qutis")
 
 [node name="player" parent="." instance=ExtResource("2_ltkjv")]
-position = Vector2(1808, 320)
+position = Vector2(44, 322)
 scale = Vector2(0.3, 0.3)
 
 [node name="tileset" type="StaticBody2D" parent="."]
@@ -261,6 +262,42 @@ scale = Vector2(0.42072, 0.420722)
 sprite_frames = SubResource("SpriteFrames_fkoc3")
 autoplay = "default"
 frame_progress = 0.518239
+
+[node name="enemy" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(389, 517)
+
+[node name="enemy2" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(417, 505)
+
+[node name="enemy10" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(735, 525)
+
+[node name="enemy11" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(758, 545)
+
+[node name="enemy12" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(771, 517)
+
+[node name="enemy3" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(1134, 109)
+
+[node name="enemy4" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(1158, 103)
+
+[node name="enemy5" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(1186, 103)
+
+[node name="enemy6" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(1215, 104)
+
+[node name="enemy7" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(1245, 104)
+
+[node name="enemy8" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(1273, 104)
+
+[node name="enemy9" parent="." instance=ExtResource("17_k7i7u")]
+position = Vector2(1298, 105)
 
 [connection signal="body_entered" from="tileset/SkyLimit" to="tileset/SkyLimit" method="_on_body_entered"]
 [connection signal="body_entered" from="tileset/FragileGround/FragileArea" to="tileset/FragileGround" method="_on_fragile_area_body_entered"]

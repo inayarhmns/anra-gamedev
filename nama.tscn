@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://yrvajy2rcooh"]
+
+[ext_resource type="Script" path="res://nama.gd" id="1_bt1gv"]
+
+[sub_resource type="Theme" id="Theme_6bpx6"]
+
+[node name="nama" type="Node2D"]
+script = ExtResource("1_bt1gv")
+
+[node name="nama" type="TextureButton" parent="."]
+offset_right = 1167.0
+offset_bottom = 662.0
+theme = SubResource("Theme_6bpx6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="nama"]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 313.0
+offset_right = 1102.0
+offset_bottom = 475.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Inaya Rahmanisa"
+
+[connection signal="pressed" from="nama" to="." method="_on_nama_pressed"]
