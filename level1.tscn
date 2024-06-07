@@ -1,21 +1,25 @@
-[gd_scene load_steps=27 format=3 uid="uid://cgj72udnop0hi"]
+[gd_scene load_steps=23 format=3 uid="uid://cgj72udnop0hi"]
 
 [ext_resource type="PackedScene" uid="uid://etd7n7g77eik" path="res://bg/parallax_background.tscn" id="1_krg0l"]
 [ext_resource type="Script" path="res://level1.gd" id="1_v0p1j"]
 [ext_resource type="PackedScene" uid="uid://bneu2npvyakis" path="res://player/player.tscn" id="2_ltkjv"]
 [ext_resource type="Texture2D" uid="uid://c6cwac8rjd62f" path="res://bg/foreground.png" id="3_qutis"]
+[ext_resource type="Script" path="res://SceneManager.gd" id="5_0p18k"]
 [ext_resource type="Script" path="res://tileset.gd" id="5_iexeq"]
 [ext_resource type="PackedScene" uid="uid://cw332ljbbcxun" path="res://tileset/elevating_crate.tscn" id="5_rtmil"]
 [ext_resource type="PackedScene" uid="uid://crv8k3rp3ug58" path="res://tileset/enemy_ground_body.tscn" id="7_oplk6"]
 [ext_resource type="PackedScene" uid="uid://dq5kv6hqxv871" path="res://tileset/elevating_ground.tscn" id="8_v8mol"]
 [ext_resource type="PackedScene" uid="uid://mdvk5s5yaims" path="res://tileset/non_gravity_area.tscn" id="9_cwxan"]
 [ext_resource type="Texture2D" uid="uid://c7h1ber61bhxm" path="res://tileset/fragile sprite.png" id="10_a5fxo"]
+[ext_resource type="PackedScene" uid="uid://cgbey77p0nkj4" path="res://enemy/wind.tscn" id="10_a77no"]
 [ext_resource type="Script" path="res://FragileGround.gd" id="10_wo440"]
 [ext_resource type="PackedScene" uid="uid://ib4qehqddd2o" path="res://fragile_area.tscn" id="11_p5kyh"]
-[ext_resource type="Texture2D" uid="uid://cwqhgwei06nrw" path="res://elements/emilium.png" id="13_bwn1b"]
 [ext_resource type="Script" path="res://emilium.gd" id="13_wo3v6"]
 [ext_resource type="Script" path="res://RockBottom.gd" id="13_wtlc0"]
 [ext_resource type="Texture2D" uid="uid://cctq1an7mjk6i" path="res://bg/rockbottom-sprite.png" id="14_et4lm"]
+[ext_resource type="PackedScene" uid="uid://by6ojaeegoxl4" path="res://enemy/enemy_2.tscn" id="17_y4gg3"]
+[ext_resource type="PackedScene" uid="uid://qrsf1e15hfqo" path="res://elements/beam.tscn" id="18_02bgn"]
+[ext_resource type="Texture2D" uid="uid://dujx8us1uakg2" path="res://enemy/enemy2.png" id="19_n5w4m"]
 
 [sub_resource type="GDScript" id="GDScript_jtfyp"]
 script/source = "extends Area2D
@@ -32,67 +36,18 @@ script/source = "extends Area2D
 #func _on_body_entered(body):
 #	body.velocity = Vector2.ZERO
 #	print(\"Anra is dead\")
+
+
+func _on_body_entered(body):
+	if (body.get_name()  == 'player'):
+		body.is_dead = true
+#	print('Anra is dead')
+	
+#	pass # Replace with function body.
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xjfh0"]
 radius = 17.0294
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7a7wu"]
-atlas = ExtResource("13_bwn1b")
-region = Rect2(0, 0, 257, 257)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6olcg"]
-atlas = ExtResource("13_bwn1b")
-region = Rect2(257, 0, 257, 257)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5heqo"]
-atlas = ExtResource("13_bwn1b")
-region = Rect2(514, 0, 257, 257)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2lp1x"]
-atlas = ExtResource("13_bwn1b")
-region = Rect2(771, 0, 257, 257)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h25ic"]
-atlas = ExtResource("13_bwn1b")
-region = Rect2(1028, 0, 257, 257)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tna71"]
-atlas = ExtResource("13_bwn1b")
-region = Rect2(1285, 0, 257, 257)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0xm2s"]
-atlas = ExtResource("13_bwn1b")
-region = Rect2(1542, 0, 257, 257)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fkoc3"]
-animations = [{
-"frames": [{
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_7a7wu")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_6olcg")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_5heqo")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_2lp1x")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_h25ic")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_tna71")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_0xm2s")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Anra" type="Control"]
 layout_mode = 3
@@ -119,8 +74,9 @@ scale = Vector2(0.22051, 0.22051)
 texture = ExtResource("3_qutis")
 
 [node name="player" parent="." instance=ExtResource("2_ltkjv")]
-position = Vector2(1808, 320)
+position = Vector2(67, 346)
 scale = Vector2(0.3, 0.3)
+script = ExtResource("5_0p18k")
 
 [node name="tileset" type="StaticBody2D" parent="."]
 position = Vector2(64, 1801)
@@ -187,6 +143,41 @@ polygon = PackedVector2Array(1520, -1145, 1520, -1065, 1904, -1065, 1904, -1161,
 [node name="ElevatingGround2" parent="tileset" instance=ExtResource("8_v8mol")]
 position = Vector2(1072, -1881)
 scale = Vector2(0.432, 0.9)
+
+[node name="windsmall" type="Node2D" parent="tileset"]
+position = Vector2(-64, -1801)
+
+[node name="wind9" parent="tileset/windsmall" instance=ExtResource("10_a77no")]
+position = Vector2(1605, 417)
+scale = Vector2(0.138788, 0.0821711)
+
+[node name="wind10" parent="tileset/windsmall" instance=ExtResource("10_a77no")]
+position = Vector2(1644, 417)
+scale = Vector2(0.138788, 0.0821711)
+
+[node name="wind11" parent="tileset/windsmall" instance=ExtResource("10_a77no")]
+position = Vector2(1691, 417)
+scale = Vector2(0.138788, 0.0821711)
+
+[node name="wind12" parent="tileset/windsmall" instance=ExtResource("10_a77no")]
+position = Vector2(1740, 416)
+scale = Vector2(0.138788, 0.0821711)
+
+[node name="wind13" parent="tileset/windsmall" instance=ExtResource("10_a77no")]
+position = Vector2(1789, 416)
+scale = Vector2(0.138788, 0.0821711)
+
+[node name="wind14" parent="tileset/windsmall" instance=ExtResource("10_a77no")]
+position = Vector2(1838, 416)
+scale = Vector2(0.138788, 0.0821711)
+
+[node name="wind15" parent="tileset/windsmall" instance=ExtResource("10_a77no")]
+position = Vector2(1887, 416)
+scale = Vector2(0.138788, 0.0821711)
+
+[node name="wind16" parent="tileset/windsmall" instance=ExtResource("10_a77no")]
+position = Vector2(1938, 416)
+scale = Vector2(0.138788, 0.0821711)
 
 [node name="FragileGround" type="CollisionPolygon2D" parent="tileset"]
 position = Vector2(-597.818, -484.585)
@@ -255,12 +246,299 @@ script = ExtResource("13_wo3v6")
 position = Vector2(1807, 191)
 shape = SubResource("CircleShape2D_xjfh0")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="elements/emilium"]
-position = Vector2(1808, 192)
-scale = Vector2(0.42072, 0.420722)
-sprite_frames = SubResource("SpriteFrames_fkoc3")
-autoplay = "default"
-frame_progress = 0.518239
+[node name="AnimatedSprite2D" parent="elements/emilium" instance=ExtResource("18_02bgn")]
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="enemy2" parent="enemies" instance=ExtResource("17_y4gg3")]
+position = Vector2(727, 530)
+
+[node name="enemy3" parent="enemies" instance=ExtResource("17_y4gg3")]
+position = Vector2(749, 556)
+rotation = -2.55691
+
+[node name="enemy4" parent="enemies" instance=ExtResource("17_y4gg3")]
+position = Vector2(769, 502)
+rotation = 1.38754
+
+[node name="enemy5" parent="enemies" instance=ExtResource("17_y4gg3")]
+position = Vector2(770, 530)
+rotation = -1.46084
+
+[node name="enemy6" parent="enemies" instance=ExtResource("17_y4gg3")]
+position = Vector2(390, 506)
+scale = Vector2(0.5, 0.5)
+
+[node name="enemy8" parent="enemies" instance=ExtResource("17_y4gg3")]
+position = Vector2(415, 512)
+rotation = 2.19213
+scale = Vector2(0.5, 0.5)
+
+[node name="enemy7" parent="enemies" instance=ExtResource("17_y4gg3")]
+position = Vector2(398, 530)
+rotation = 2.92168
+scale = Vector2(0.8, 0.8)
+
+[node name="windbig" type="Node2D" parent="."]
+
+[node name="wind" parent="windbig" instance=ExtResource("10_a77no")]
+position = Vector2(1079, 337)
+scale = Vector2(0.214225, 0.214225)
+
+[node name="wind2" parent="windbig" instance=ExtResource("10_a77no")]
+position = Vector2(1145, 335)
+scale = Vector2(0.214225, 0.214225)
+
+[node name="wind3" parent="windbig" instance=ExtResource("10_a77no")]
+position = Vector2(1218, 336)
+scale = Vector2(0.214225, 0.214225)
+
+[node name="wind4" parent="windbig" instance=ExtResource("10_a77no")]
+position = Vector2(1288, 336)
+scale = Vector2(0.214225, 0.214225)
+
+[node name="wind5" parent="windbig" instance=ExtResource("10_a77no")]
+position = Vector2(1359, 334)
+scale = Vector2(0.214225, 0.214225)
+
+[node name="wind6" parent="windbig" instance=ExtResource("10_a77no")]
+position = Vector2(1425, 347)
+scale = Vector2(0.188991, 0.188991)
+
+[node name="wind7" parent="windbig" instance=ExtResource("10_a77no")]
+position = Vector2(1494, 346)
+scale = Vector2(0.188991, 0.188991)
+
+[node name="wind8" parent="windbig" instance=ExtResource("10_a77no")]
+position = Vector2(1547, 345)
+scale = Vector2(0.188991, 0.188991)
+
+[node name="enemies_static" type="Node2D" parent="."]
+
+[node name="Enemy3" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1113, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy4" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1122, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy5" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1132, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy6" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1143, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy7" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1154, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy8" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1165, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy9" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1175, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy10" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1185, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy11" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1196, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy12" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1207, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy13" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1219, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy14" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1232, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy15" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1244, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy16" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1257, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy17" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1269, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy18" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1280, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy19" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1291, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy20" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1302, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy21" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1314, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy22" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1326, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy23" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1338, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy24" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1350, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy25" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1362, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy26" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1373, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy27" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1384, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy28" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1397, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy29" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1397, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy30" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1408.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy31" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1420.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy32" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1431.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy33" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1442.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy34" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1455.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy35" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1455.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy36" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1408.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy37" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1420.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy38" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1431.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy39" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1442.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy40" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1455.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy41" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1455.53, 105.744)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy42" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1478, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy43" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1478, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy44" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1498, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy45" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1518, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy46" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1539, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
+
+[node name="Enemy47" type="Sprite2D" parent="enemies_static"]
+position = Vector2(1559, 106)
+scale = Vector2(0.0170457, 0.0170457)
+texture = ExtResource("19_n5w4m")
 
 [connection signal="body_entered" from="tileset/SkyLimit" to="tileset/SkyLimit" method="_on_body_entered"]
 [connection signal="body_entered" from="tileset/FragileGround/FragileArea" to="tileset/FragileGround" method="_on_fragile_area_body_entered"]

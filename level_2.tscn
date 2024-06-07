@@ -1,0 +1,169 @@
+[gd_scene load_steps=14 format=3 uid="uid://fpq0a5nxxtp"]
+
+[ext_resource type="Script" path="res://level_2.gd" id="1_fq85m"]
+[ext_resource type="PackedScene" uid="uid://etd7n7g77eik" path="res://bg/parallax_background.tscn" id="1_xnnsd"]
+[ext_resource type="Script" path="res://tileset2.gd" id="2_p2ejp"]
+[ext_resource type="PackedScene" uid="uid://bneu2npvyakis" path="res://player/player.tscn" id="3_ffygm"]
+[ext_resource type="Script" path="res://SceneManager.gd" id="4_fmfmo"]
+[ext_resource type="Texture2D" uid="uid://c6cwac8rjd62f" path="res://bg/foreground.png" id="6_6k2yy"]
+[ext_resource type="PackedScene" uid="uid://by6ojaeegoxl4" path="res://enemy/enemy_2.tscn" id="9_ixg38"]
+[ext_resource type="Script" path="res://ruffium.gd" id="10_wljh6"]
+[ext_resource type="Texture2D" uid="uid://bxjinat00obfu" path="res://elements/ruffium-element.png" id="11_sl4ju"]
+[ext_resource type="Script" path="res://RockBottom.gd" id="16_wg7u8"]
+[ext_resource type="Texture2D" uid="uid://cctq1an7mjk6i" path="res://bg/rockbottom-sprite.png" id="17_kefca"]
+
+[sub_resource type="GDScript" id="GDScript_t0avo"]
+script/source = "extends Area2D
+
+
+#func _physics_process(delta):
+#	if get_overlapping_bodies().length != 0:
+#		for body in get_overlapping_bodies():
+#			if body.get_name() == \"player\":
+#
+				
+			
+
+#func _on_body_entered(body):
+#	body.velocity = Vector2.ZERO
+#	print(\"Anra is dead\")
+
+
+func _on_body_entered(body):
+	if (body.get_name()  == 'player'):
+		body.is_dead = true
+#	print('Anra is dead')
+	
+#	pass # Replace with function body.
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_da7a8"]
+radius = 13.1529
+
+[node name="level2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fq85m")
+
+[node name="tileset2" type="StaticBody2D" parent="."]
+script = ExtResource("2_p2ejp")
+
+[node name="SkyLimit2" type="Area2D" parent="tileset2"]
+script = SubResource("GDScript_t0avo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tileset2/SkyLimit2"]
+position = Vector2(16, 0)
+scale = Vector2(1.52989, 3.52083)
+polygon = PackedVector2Array(16, 0, 1840, 0, 1840, -96, 1676.47, -96, 0, -96, 0, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tileset2"]
+position = Vector2(5, 108)
+polygon = PackedVector2Array(12, 217, 26, 217, 27, 371, 354, 371, 352, 312, 467, 310, 468, 225, 662, 225, 662, 156, 817, 154, 817, 522, 854, 522, 857, 221, 986, 221, 988, 304, 1088, 304, 1088, 577, 1143, 577, 1146, 510, 1349, 508, 1350, 574, 1508, 574, 1508, 506, 1662, 504, 1662, 575, 2728, 569, 2762, -347, 2924, -377, 2957, 1088, -165, 1076, -150, 154)
+
+[node name="Polygon2D" type="Polygon2D" parent="tileset2/CollisionPolygon2D"]
+color = Color(0.164706, 0.172549, 0.207843, 1)
+
+[node name="RockBottom" type="Area2D" parent="tileset2"]
+position = Vector2(0, 1900)
+script = ExtResource("16_wg7u8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tileset2/RockBottom"]
+polygon = PackedVector2Array(-80, -1065, 2800, -1065, 2800, -649, -80, -649)
+
+[node name="Rockbottom-sprite" type="Sprite2D" parent="tileset2/RockBottom"]
+position = Vector2(1360, -945)
+scale = Vector2(0.743795, 0.56338)
+texture = ExtResource("17_kefca")
+
+[node name="ParallaxBackground3" parent="." instance=ExtResource("1_xnnsd")]
+scale = Vector2(0.1, 0.1)
+transform = Transform2D(0.1, 0, 0, 0.1, 0, 0)
+
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
+layer = 0
+scale = Vector2(0.1, 0.1)
+transform = Transform2D(0.1, 0, 0, 0.1, 0, 0)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxForeground"]
+visible = false
+
+[node name="Foreground" type="Sprite2D" parent="ParallaxForeground/ParallaxLayer"]
+position = Vector2(2000, 442)
+scale = Vector2(0.22051, 0.22051)
+texture = ExtResource("6_6k2yy")
+
+[node name="player" parent="." instance=ExtResource("3_ffygm")]
+position = Vector2(60, 453)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("4_fmfmo")
+
+[node name="enemies" type="Node2D" parent="."]
+position = Vector2(0, 110)
+
+[node name="enemy2" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(730, 147)
+scale = Vector2(0.5, 0.5)
+
+[node name="enemy3" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(826, 504)
+
+[node name="enemy4" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(854, 477)
+rotation = 1.68075
+
+[node name="enemy5" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(821, 452)
+rotation = 2.33874
+
+[node name="enemy6" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(1114, 565)
+
+[node name="enemy7" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(1194, 505)
+scale = Vector2(0.3, 0.3)
+
+[node name="enemy13" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(1590, 496)
+scale = Vector2(0.4, 0.4)
+
+[node name="enemy14" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(1556, 497)
+scale = Vector2(0.4, 0.4)
+
+[node name="enemy12" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(1573, 495)
+scale = Vector2(0.5, 0.5)
+
+[node name="enemy8" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(1273, 505)
+scale = Vector2(0.3, 0.3)
+
+[node name="enemy10" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(1279, 495)
+scale = Vector2(0.3, 0.3)
+
+[node name="enemy9" parent="enemies" instance=ExtResource("9_ixg38")]
+position = Vector2(1286, 505)
+scale = Vector2(0.3, 0.3)
+
+[node name="ruffium" type="Area2D" parent="."]
+position = Vector2(0, 110)
+script = ExtResource("10_wljh6")
+
+[node name="Ruffium-element" type="Sprite2D" parent="ruffium"]
+position = Vector2(1643, 490)
+scale = Vector2(0.140374, 0.140374)
+texture = ExtResource("11_sl4ju")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ruffium"]
+position = Vector2(1643, 490)
+shape = SubResource("CircleShape2D_da7a8")
+
+[connection signal="body_entered" from="tileset2/SkyLimit2" to="tileset2/SkyLimit2" method="_on_body_entered"]
+[connection signal="area_entered" from="tileset2/RockBottom" to="tileset2/RockBottom" method="_on_area_entered"]
+[connection signal="body_entered" from="tileset2/RockBottom" to="tileset2/RockBottom" method="_on_body_entered"]
+[connection signal="body_entered" from="ruffium" to="ruffium" method="_on_body_entered"]

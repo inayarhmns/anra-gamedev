@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcrdwc64u837n"]
+
+[ext_resource type="Texture2D" uid="uid://bd25ysfhmrhsy" path="res://ui/FoundEmillium.png" id="1_ki601"]
+
+[node name="emilium" type="Node2D"]
+
+[node name="FoundEmillium" type="Sprite2D" parent="."]
+position = Vector2(574, 323)
+texture = ExtResource("1_ki601")

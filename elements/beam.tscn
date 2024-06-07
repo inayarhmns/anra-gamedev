@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://qrsf1e15hfqo"]
+
+[ext_resource type="Texture2D" uid="uid://cwqhgwei06nrw" path="res://elements/emilium.png" id="1_irqmq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a7wu"]
+atlas = ExtResource("1_irqmq")
+region = Rect2(0, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6olcg"]
+atlas = ExtResource("1_irqmq")
+region = Rect2(257, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5heqo"]
+atlas = ExtResource("1_irqmq")
+region = Rect2(514, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lp1x"]
+atlas = ExtResource("1_irqmq")
+region = Rect2(771, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h25ic"]
+atlas = ExtResource("1_irqmq")
+region = Rect2(1028, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tna71"]
+atlas = ExtResource("1_irqmq")
+region = Rect2(1285, 0, 257, 257)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xm2s"]
+atlas = ExtResource("1_irqmq")
+region = Rect2(1542, 0, 257, 257)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fkoc3"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_7a7wu")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_6olcg")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_5heqo")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_2lp1x")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_h25ic")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_tna71")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_0xm2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+position = Vector2(1808, 192)
+scale = Vector2(0.42072, 0.420722)
+sprite_frames = SubResource("SpriteFrames_fkoc3")
+autoplay = "default"
+frame_progress = 0.518239

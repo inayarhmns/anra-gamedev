@@ -18,6 +18,7 @@ const rotation_speed = 1
 @onready var player_camera = $PlayerCamera
 @onready var hurtbox = $hurtbox
 @onready var sky_detector = $SkyDetector
+@onready var animation = $AnimatedSprite2D
 @export var anti_gravity = false
 @export var is_dead = false
 @export var elevated_by_ground = false
@@ -54,12 +55,23 @@ func _physics_process(delta):
 	check_sky()
 #	check_non_gravity_area()
 	move_no_gravity()
+	handle_die()
 #	print(jump_count)
 #	print(player_camera.offset.y)
 #	print(velocity)
 #	print(is_on_ceiling())
 	
-
+func handle_die():
+	if (is_dead):
+		var scene2 = ""
+		var scene1 = "res://ui/gameover.tscn"
+		if (SceneManager.Level == 1):
+			scene2 = "res://level1.tscn"
+		elif (SceneManager.Level == 2):
+			scene2 = "res://level_2.tscn"			
+		SceneManager.start_timer(scene1, scene2)
+#		print("dead bro")
+		
 
 func cam_offset_up_elevate(left_pos, right_pos, target_offset, current_offset, speed):
 	if (global_position.x >= left_pos && global_position.x <= right_pos):
@@ -132,6 +144,7 @@ func get_linear_dir():
 
 func move(dir):
 	velocity = velocity.move_toward(dir*SPEED, ACC)
+	handle_animation()
 	
 func input() -> Vector2:
 	var dir = Vector2.ZERO
@@ -168,7 +181,25 @@ func crate_elevate_self():
 ##				velocity -= Vector2(0,get_gravity())
 #				anti_gravity = true
 ##				print(velocity.y)
-
+func handle_animation():
+	if (!anti_gravity):
+		if (get_linear_dir() == "right"):
+			animation.play("right")
+		elif (get_linear_dir() == "left"): animation.play("left")
+	else:
+		if (get_linear_dir() == "left"):
+			animation.play("right")
+		elif (get_linear_dir() == "right"): animation.play("left")
+	if (input().x == 0):
+		animation.stop()
+#	if (velocity.x > 0):
+#		animation.play("right")
+#	if (velocity.x <0):
+#		animation.play("left")
+	
+#	print(velocity.x <= 0)
+	
+	
 func move_in_gravity():
 	if !anti_gravity:
 		var dir: Vector2 = input()

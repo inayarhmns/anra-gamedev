@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgbey77p0nkj4"]
+
+[ext_resource type="Texture2D" uid="uid://dpubtodrulcau" path="res://enemy/wind.png" id="1_lsitb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2tjo"]
+atlas = ExtResource("1_lsitb")
+region = Rect2(0, 0, 1174, 1174)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeico"]
+atlas = ExtResource("1_lsitb")
+region = Rect2(1174, 0, 1174, 1174)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kwge"]
+atlas = ExtResource("1_lsitb")
+region = Rect2(2348, 0, 1174, 1174)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uilix"]
+atlas = ExtResource("1_lsitb")
+region = Rect2(3522, 0, 1174, 1174)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs2wy"]
+atlas = ExtResource("1_lsitb")
+region = Rect2(4696, 0, 1174, 1174)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3jl2"]
+atlas = ExtResource("1_lsitb")
+region = Rect2(5870, 0, 1174, 1174)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uulh1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2tjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jeico")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kwge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uilix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs2wy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3jl2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="wind" type="AnimatedSprite2D"]
+position = Vector2(1086, 389)
+scale = Vector2(0.351789, 0.351789)
+sprite_frames = SubResource("SpriteFrames_uulh1")
+autoplay = "default"
+frame_progress = 0.501684
